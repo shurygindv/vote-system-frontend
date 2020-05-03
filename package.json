@@ -1,0 +1,27 @@
+{
+  "name": "vote-system-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start": "concurrently \"parcel index.html\" \"bsb -make-world -w\"",
+    "build": "parcel build index.html"
+  },
+  "author": "Daniil_Shurygin",
+  "license": "ISC",
+  "devDependencies": {
+    "bs-platform": "^7.2.2",
+    "bsb-js": "^1.1.7",
+    "concurrently": "^5.2.0",
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "@sdv-studio/bs-rsuite-ui-react": "git+https://github.com/shurygindv/bs-rsuite-ui-react.git#development",
+    "bs-css-emotion": "^1.2.0",
+    "bs-webapi": "^0.15.9",
+    "normalize.css": "^8.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "reason-react": "^0.7.1"
+  }
+}
