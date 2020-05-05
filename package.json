@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "concurrently \"parcel index.html\" \"bsb -make-world -w\"",
-    "build": "parcel build index.html"
+    "start": "concurrently \"npm run start:dev\" \"npm run watch:bsb\"",
+    "build": "parcel build index.html",
+    "start:dev": "parcel index.html",
+    "bsb:watch": "bsb -make-world -w"
   },
   "author": "Daniil_Shurygin",
   "license": "ISC",
@@ -16,10 +18,12 @@
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {
+    "@glennsl/bs-json": "^5.0.2",
     "@sdv-studio/bs-rsuite-ui-react": "git+https://github.com/shurygindv/bs-rsuite-ui-react.git#development",
     "bs-css-emotion": "^1.2.0",
     "bs-webapi": "^0.15.9",
     "normalize.css": "^8.0.1",
+    "re-classnames": "^4.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "reason-react": "^0.7.1"

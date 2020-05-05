@@ -1,7 +1,7 @@
 {
     "name": "vote-system",
     "reason": { "react-jsx": 3 },
-    "bsc-flags": ["-bs-super-errors"],
+    "bsc-flags": ["-bs-super-errors", "-bs-g"],
     "sources": [
       {
         "dir": "src",
@@ -11,7 +11,7 @@
     "package-specs": [
       {
         "module": "es6",
-        "in-source": false
+        "in-source": true
       }
     ],
     "suffix": ".bs.js",
@@ -19,8 +19,10 @@
     "bs-dependencies": [
       "bs-css",
       "bs-webapi",
-      "bs-css-emotion",
       "reason-react",
+      "re-classnames",
+      "bs-css-emotion",
+      "@glennsl/bs-json",
       "@sdv-studio/bs-rsuite-ui-react"
     ],
     "ppx-flags": [],

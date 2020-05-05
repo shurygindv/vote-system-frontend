@@ -8,4 +8,9 @@ node_modules/
 # bs
 .merlin
 lib/
+*.bs.js
 
+
+# editor
+.idea
+.vscode

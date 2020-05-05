@@ -1,39 +1,27 @@
 open Webapi.Dom;
 
-let unwrapUnsafely =
-  fun
-  | Some(v) => v
-  | None => raise(Invalid_argument("Passed `None` to unwrapUnsafely"));
+let (>>=) = Belt.Option.flatMap;
 
-let andThen = (f: 'a => option('b)) =>
-  fun
-  | Some(v) => f(v)
-  | None => None;
-
-let useOverflowStyle = style => {
-  let setOverflowProp = value => {
-    CssStyleDeclaration.setProperty("overflow", value, "", style);
+let useOverflowHiddenStyle = style => {
+  let setOverflowProp = v => {
+    CssStyleDeclaration.setProperty("overflow", v, "", style);
   };
 
-  let resetOverflow = _ => {
-    setOverflowProp("");
-  };
-
-  React.useLayoutEffect0(() => {
+  let applyOverflow = _ => {
     setOverflowProp("hidden");
 
-    Some(resetOverflow);
-  });
+    Some(_ => setOverflowProp(""));
+  };
+
+  React.useLayoutEffect0(applyOverflow);
 };
 
 let useOverflowHiddenBody = _ => {
-  // TODO: rethink
-  document
-  |> Document.asHtmlDocument
-  |> andThen(HtmlDocument.body)
-  |> unwrapUnsafely
-  |> Element.asHtmlElement
-  |> unwrapUnsafely
-  |> HtmlElement.style
-  |> useOverflowStyle;
+  let documentBody =
+    Document.asHtmlDocument(document)
+    >>= HtmlDocument.body
+    >>= Element.asHtmlElement
+    |> Belt.Option.getExn;
+
+  documentBody |> HtmlElement.style |> useOverflowHiddenStyle;
 };

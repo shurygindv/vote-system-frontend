@@ -2,6 +2,7 @@ ReactDOMRe.renderToElementWithId(<Application />, "root");
 
 // global
 [%bs.raw {|require('normalize.css')|}];
+[%bs.raw {|require('./assets/styles/global.css')|}];
 [%bs.raw {|require('rsuite/dist/styles/rsuite-default.css')|}];
 
 // hot reload
