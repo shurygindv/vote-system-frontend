@@ -31,11 +31,13 @@ let make = (
   ~color: option(Theme.Color.t)=?, 
   ~size: option(Theme.Size.t)=?, 
   ~bold=false, 
+  ~className: string= "",
   ~uppercase=false,
   ~centered=false,
 ) => {
   let classes =
     Cn.make([
+      className,
       Cn.ifTrue(Styles.bold, bold),
       Cn.ifTrue(Styles.uppercase, uppercase),
       Cn.ifTrue(Styles.center, centered),

@@ -4,7 +4,19 @@ let goToAuthorization = () => {
 };
 
 let goToDashboard = () => {
-    ReasonReactRouter.push("/dashboard")
+    ReasonReactRouter.push("/vote/dashboard")
+};
+
+let goToAddingCandidate = () => {
+    ReasonReactRouter.push("/vote/add-candidate")
+};
+
+let goToGeneratingBulletin = () => {
+    ReasonReactRouter.push("/vote/generate-bulletin")
+};
+
+let goToRating = () => {
+    ReasonReactRouter.push("/vote/rating")
 };
 
 [@react.component]
@@ -12,8 +24,8 @@ let make = _ => {
     let url = ReasonReactRouter.useUrl();
 
     switch (url.path) {
-        | ["dashboard"] => <Dashboard />
-        | [] => <Authorization />
-        | _ => <NotFound />
+        | ["dashboard"] => <VoteMainPage />
+        | [] => <AuthPage />
+        | _ => <NotFoundPage />
     }
 }

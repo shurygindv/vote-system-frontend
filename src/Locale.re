@@ -14,9 +14,13 @@ let ruLocalePairs = [
   ("Auth.Register", {j|Зарегистрироваться|j}),
   ("Auth.Slogan", {j|Наш лозунг – «Голосовать легко!»|j}),
 
-  ("Home.Dashboard", {j|Панель управления|j}),
-  ("Home.Vote", {j|Голосование|j}),
-  ("Home.Settings", {j|Настройки|j}),
+  ("Vote.Dashboard", {j|Панель управления|j}),
+  ("Vote.Text", {j|Голосование|j}),
+  ("Vote.Settings", {j|Настройки|j}),
+  ("Vote.AddCandidate", {j|Добавить кандидата|j}),
+  ("Vote.GenerateBulletin", {j|Сгенерировать бюллетень|j}),
+  ("Vote.Rating", {j|Рейтинг|j}),
+  ("Vote.Slogan", {j|Исполни свой гражданский долг!|j})
 ];
 
 type locale = 
