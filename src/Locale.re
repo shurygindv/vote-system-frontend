@@ -12,16 +12,19 @@ let ruLocalePairs = [
   ("Auth.ConfirmPassword", {j|Повторите пароль|j}),
   ("Auth.Registration", {j|Регистрация|j}),
   ("Auth.Register", {j|Зарегистрироваться|j}),
-
   ("Auth.Slogan", {j|Наш лозунг – «Голосовать легко!»|j}),
-]
+
+  ("Home.Dashboard", {j|Панель управления|j}),
+  ("Home.Vote", {j|Голосование|j}),
+  ("Home.Settings", {j|Настройки|j}),
+];
 
 type locale = 
   | En(string)
   | Ru(string);
 
 let ruLocale = ruLocalePairs
-  |> Js.Dict.fromList
+  -> Js.Dict.fromList
 
 let translate = Js.Dict.get(ruLocale)
 

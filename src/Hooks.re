@@ -23,5 +23,5 @@ let useOverflowHiddenBody = _ => {
     >>= Element.asHtmlElement
     |> Belt.Option.getExn;
 
-  documentBody |> HtmlElement.style |> useOverflowHiddenStyle;
+  documentBody -> HtmlElement.style -> useOverflowHiddenStyle;
 };

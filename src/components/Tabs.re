@@ -46,7 +46,7 @@ module TabList = {
       let (activeTabIndex, setActiveTabIndex) = React.useContext(TabsProvider.context);
 
       let handleClick = _ => {
-        setActiveTabIndex(index);
+        index -> setActiveTabIndex;
       };  
 
       let isActive = activeTabIndex == index;
@@ -77,6 +77,7 @@ module TabPanel = {
 
     let block = style([
       display(`flex), 
+      alignItems(`baseline),
       transition(
         ~duration=300,
         ~timingFunction=easeInOut,

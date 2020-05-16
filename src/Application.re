@@ -1,3 +1,6 @@
 
 [@react.component]
-let make = _ => <Authorization />
+let make = _ => {
+    // 
+    <Router />
+}

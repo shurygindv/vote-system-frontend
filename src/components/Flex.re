@@ -24,6 +24,10 @@ module Styles = {
     let fullHeight = style([
         height(`percent(100.0))
     ]);
+
+    let columns = style([
+        flexDirection(`column)
+    ]);
 }
 
 
@@ -32,6 +36,7 @@ let make = (
     ~children, 
     ~className: string= "", 
     ~fullHeight=false,
+    ~columns=false,
     ~align: option(Theme.Align.t) =?,
     ~content: option([ | `spaceBetween])=?
 ) => {
@@ -40,7 +45,8 @@ let make = (
        Styles.block,
        Styles.align(align),
        Styles.content(content),
-       Cn.ifTrue(Styles.fullHeight, fullHeight)
+       Cn.ifTrue(Styles.fullHeight, fullHeight),
+       Cn.ifTrue(Styles.columns, columns),
    ]);
 
   <div className=classes>

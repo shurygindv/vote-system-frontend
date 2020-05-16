@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "concurrently \"npm run start:dev\" \"npm run watch:bsb\"",
+    "start": "concurrently \"npm run start:dev\" \"npm run bsb:watch\"",
     "build": "parcel build index.html",
     "start:dev": "parcel index.html",
     "bsb:watch": "bsb -make-world -w"

@@ -1,7 +1,7 @@
 
 // context
 let activeTabIndex = 0;
-let changeActiveIndex = (index: int) => ();
+let changeActiveIndex = (_index: int) => ();
 
 let value = (activeTabIndex, changeActiveIndex);
 
