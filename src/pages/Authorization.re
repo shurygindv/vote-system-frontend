@@ -133,7 +133,7 @@ module AuthorizationForm = {
 
   module Styles = {
     let login = style([
-      marginBottom(px(45))
+     // marginBottom(px(45))
     ]);
 
     let section = style([
@@ -170,14 +170,6 @@ module AuthorizationForm = {
 };
 
 
-module Styles = {
-  open Css;
-  
-  let slogan = style([
-    width(`percent(45.0))
-  ]);
-}
-
 [@react.component]
 let make = _ => {
   useOverflowHiddenBody();
@@ -187,9 +179,8 @@ let make = _ => {
         background=`society 
         height=`vh100
      >
-     <Flex content=`spaceBetween>
+     <Grid cols=`fr2>
       <Background 
-        className=Styles.slogan
         fullHeight=true
         bg=`darkGray
       >
@@ -204,12 +195,10 @@ let make = _ => {
           </Flex>
       </Background>
 
-      <Grid align=`middleRight>
-        <Box margin=`mdSides>
+      <Grid align=`middleCenter>
           <AuthorizationForm />
-        </Box>
       </Grid>
-      </Flex>
+      </Grid>
     </Layout.Body>
   </Layout>;
 };
