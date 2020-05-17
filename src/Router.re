@@ -12,7 +12,7 @@ let goToAddingCandidate = () => {
 };
 
 let goToGeneratingBulletin = () => {
-    ReasonReactRouter.push("/vote/generate-bulletin")
+    ReasonReactRouter.push("/vote/create-bulletin")
 };
 
 let goToRating = () => {
@@ -24,7 +24,7 @@ let make = _ => {
     let url = ReasonReactRouter.useUrl();
 
     switch (url.path) {
-        | ["dashboard"] => <VoteMainPage />
+        | ["vote", ..._rest] => <VoteMainPage />
         | [] => <AuthPage />
         | _ => <NotFoundPage />
     }

@@ -46,9 +46,6 @@ let make = (
     ]);
 
   <span className=classes>
-    {switch (Locale.t(id)) {
-     | En(v) => React.string(v)
-     | Ru(v) => React.string(v)
-     }}
+     <Translator id={id} />
   </span>;
 };

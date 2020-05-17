@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@glennsl/bs-json": "^5.0.2",
-    "@sdv-studio/bs-rsuite-ui-react": "git+https://github.com/shurygindv/bs-rsuite-ui-react.git#development",
     "bs-css-emotion": "^1.2.0",
+    "bs-rsuite-ui-react": "git+https://github.com/shurygindv/bs-rsuite-ui-react.git#development",
     "bs-webapi": "^0.15.9",
     "normalize.css": "^8.0.1",
     "re-classnames": "^4.1.0",

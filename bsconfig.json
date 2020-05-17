@@ -23,7 +23,7 @@
       "re-classnames",
       "bs-css-emotion",
       "@glennsl/bs-json",
-      "@sdv-studio/bs-rsuite-ui-react"
+      "bs-rsuite-ui-react"
     ],
     "ppx-flags": [],
     "refmt": 3

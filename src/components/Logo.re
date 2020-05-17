@@ -22,7 +22,7 @@ module Styles = {
 [@react.component]
 let make = (~withText=true) => {
 
-  <a href="/dashboard" className={Styles.block}>
+  <a href="/vote/dashboard" className={Styles.block}>
     <img className={Styles.logo} src={Images.logo2} alt="logo" />
 
     {withText ? 

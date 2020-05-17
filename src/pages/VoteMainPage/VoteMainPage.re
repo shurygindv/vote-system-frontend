@@ -17,9 +17,6 @@ module Navbar = {
               {React.string("Products")}
             </Nav.Item>
             <Dropdown title={React.string("About")}>
-              <Dropdown.Item eventKey="4">
-                {React.string("News")}
-              </Dropdown.Item>
               <Dropdown.Item eventKey="5">
                 {React.string("News")}
               </Dropdown.Item>
@@ -30,7 +27,7 @@ module Navbar = {
           </Nav>
           <Nav pullRight=true>
             <Nav.Item icon={<Icon icon="cog" />}>
-                <Text id="Vote.Settings" />
+              <Text id="Vote.Settings" />
             </Nav.Item>
           </Nav>
         </Navbar.Body>
@@ -40,44 +37,95 @@ module Navbar = {
 };
 
 module Sidenav = {
+  module Navlink = {
+    type linkProps = {
+      href: string,
+      className: string,
+      onClick: Js.Nullable.t(ReactEvent.Mouse.t => unit),
+      children: ReasonReact.reactElement,
+    };
+
+    // wrapper
+    // https://github.com/reasonml/reason-react/blob/master/docs/component-as-prop.md
+    // for details
+    let linkFn = (props: linkProps) => {
+      let handleClick = props.onClick -> Js.Nullable.toOption;
+
+      <Link 
+          href={props.href} 
+          onClick={handleClick}
+          className={props.className}
+        >
+        {props.children}
+      </Link>;
+    };
+
+    [@react.component]
+    let make = (~children, ~href: string="#", ~icon: React.element) => {
+      <RsuiteUi.Dropdown.Item
+        eventKey="2"
+        componentClass=linkFn icon href >
+        children
+      </RsuiteUi.Dropdown.Item>;
+    };
+  };
+
+  let firstItemIndex = "0";
 
   [@react.component]
   let make = _ => {
-    let handleDropdownSelect = (v: array(string), _e) => {
-      Js.log(v);
-      ();
+    let (activeEventKey, setActiveItem) = React.useState(() => firstItemIndex);
+
+    let handleNavChange = (v: list(string), _e) => {
+      switch(Belt.List.flatten([v])) {
+        | [first] => setActiveItem(_ => first);
+        | _ => ()
+      }
     };
 
     RsuiteUi.(
-      <Sidenav onSelect=handleDropdownSelect>
-        <Sidenav.Header> 
-               <Logo />
-        </Sidenav.Header>
+      <Sidenav onSelect=handleNavChange>
+        <Sidenav.Header> <Logo /> </Sidenav.Header>
         <Sidenav.Body>
-          <Nav>
+          <Nav activeKey={activeEventKey}>
             <Nav.Item
-              active=true
-              eventKey="1"
+              eventKey="0"
+              href="/vote/dashboard"
+              componentClass=Navlink.linkFn
               icon={<Icon icon="dashboard" />}
             >
               <Text id="Vote.Dashboard" />
             </Nav.Item>
+
             <Dropdown
-              eventKey="2"
+              eventKey="1"
               title={<Text id="Vote.Text" />}
               icon={<Icon icon="group" />}>
-              <Dropdown.Item eventKey="2-1"  icon={<Icon icon="plus" />}>
-                <Text id="Vote.AddCandidate" />
-              </Dropdown.Item>
-              <Dropdown.Item eventKey="2-2" icon={<Icon icon="exchange" />}>
-                 <Text id="Vote.GenerateBulletin" />
-              </Dropdown.Item>
-              <Dropdown.Item eventKey="2-3"  icon={<Icon icon="bar-chart" />}>
-                <Text id="Vote.Rating" />
-              </Dropdown.Item>
+              <Navlink
+                href="/vote/add-candidate"
+                icon={<Icon icon="plus" />}>
+                <Translator id="Vote.AddCandidate" />
+              </Navlink>
+
+              <Navlink
+                href="/vote/create-bulletin"
+                icon={<Icon icon="exchange" />}>
+                <Translator id="Vote.GenerateBulletin" />
+              </Navlink>
+
+              <Navlink
+                href="/vote/rating" icon={<Icon icon="bar-chart" />}>
+                <Translator id="Vote.Rating" />
+              </Navlink>
+
             </Dropdown>
+
             <Nav.Item
-              eventKey="3" icon={<Icon icon="gear-circle" />}>
+              eventKey="2" 
+              href="/vote/settings"
+              componentClass=Navlink.linkFn
+              icon={<Icon icon="gear-circle" />}
+            >
               <Text id="Vote.Settings" />
             </Nav.Item>
           </Nav>
@@ -87,10 +135,22 @@ module Sidenav = {
   };
 };
 
-module Content = {
+module DynamicContent = {
   [@react.component]
   let make = _ => {
-    <Flex columns=true> <Navbar /> </Flex>;
+    let url = ReasonReactRouter.useUrl();
+
+    <Flex columns=true>
+      <Navbar />
+      {switch (url.path) {
+       | ["vote", "dashboard"] => <VoteDashboard />
+       | ["vote", "add-candidate"] => <VoteAddCandidate />
+       | ["vote", "create-bulletin"] => <VoteCreateBulletin />
+       | ["vote", "rating"] => <VoteRating />
+       | ["vote", "settings"] => <VoteSettings />
+       | _ => <NotFoundPage />
+       }}
+    </Flex>;
   };
 };
 
@@ -107,7 +167,10 @@ module Styles = {
 let make = _ => {
   <Layout>
     <Layout.Body height=`vh100>
-      <Grid className=Styles.page> <Sidenav /> <Content /> </Grid>
+      <Grid className=Styles.page>
+        <Sidenav />
+        <DynamicContent />
+      </Grid>
     </Layout.Body>
   </Layout>;
 };
