@@ -1,22 +1,26 @@
 
+let goTo = p => {
+    ReasonReactRouter.push(p);
+};
+
 let goToAuthorization = () => {
-    ReasonReactRouter.push("")
+    goTo("")
 };
 
 let goToDashboard = () => {
-    ReasonReactRouter.push("/vote/dashboard")
+    goTo("/vote/dashboard")
 };
 
 let goToAddingCandidate = () => {
-    ReasonReactRouter.push("/vote/add-candidate")
+    goTo("/vote/add-candidate")
 };
 
 let goToGeneratingBulletin = () => {
-    ReasonReactRouter.push("/vote/create-bulletin")
+   goTo("/vote/create-bulletin")
 };
 
 let goToRating = () => {
-    ReasonReactRouter.push("/vote/rating")
+    goTo("/vote/rating")
 };
 
 [@react.component]

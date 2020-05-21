@@ -1,30 +1,31 @@
 {
-    "name": "vote-system",
-    "reason": { "react-jsx": 3 },
-    "bsc-flags": ["-bs-super-errors", "-bs-g"],
-    "sources": [
-      {
-        "dir": "src",
-        "subdirs": true
-      }
-    ],
-    "package-specs": [
-      {
-        "module": "es6",
-        "in-source": true
-      }
-    ],
-    "suffix": ".bs.js",
-    "namespace": true,
-    "bs-dependencies": [
-      "bs-css",
-      "bs-webapi",
-      "reason-react",
-      "re-classnames",
-      "bs-css-emotion",
-      "@glennsl/bs-json",
-      "bs-rsuite-ui-react"
-    ],
-    "ppx-flags": [],
-    "refmt": 3
-  }
+  "name": "vote-system",
+  "reason": { "react-jsx": 3 },
+  "bsc-flags": ["-bs-super-errors", "-bs-g"],
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "suffix": ".bs.js",
+  "namespace": true,
+  "bs-dependencies": [
+    "bs-css",
+    "bs-fetch",
+    "bs-webapi",
+    "reason-react",
+    "re-classnames",
+    "bs-css-emotion",
+    "@glennsl/bs-json",
+    "bs-rsuite-ui-react"
+  ],
+  "ppx-flags": [],
+  "refmt": 3
+}

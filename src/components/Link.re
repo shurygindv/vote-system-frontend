@@ -7,6 +7,7 @@ let make = (
     ) => {
   let handleClick = (e: ReactEvent.Mouse.t) => {
     ReactEvent.Synthetic.preventDefault(e);
+
     ReasonReactRouter.push(href);
 
     switch (onClick) {
