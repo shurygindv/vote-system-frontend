@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "concurrently \"npm run start:dev\" \"npm run bsb:watch\"",
+    "start": "concurrently \"npm run start:dev\" \"npm run bs:watch\"",
     "build": "parcel build index.html",
     "start:dev": "parcel index.html",
-    "bsb:watch": "bsb -make-world -w"
+    "bs:watch": "bsb -make-world -w",
+    "bs:clean": "bsb -clean-world",
+    "bs:rebuild": "bsb -make-world -clean-world"
   },
   "author": "Daniil_Shurygin",
   "license": "ISC",
   "devDependencies": {
-    "bs-platform": "^7.2.2",
+    "bs-platform": "^7.3.2",
     "bsb-js": "^1.1.7",
     "concurrently": "^5.2.0",
     "parcel-bundler": "^1.12.4"
@@ -27,6 +29,6 @@
     "re-classnames": "^4.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "reason-react": "^0.7.1"
+    "reason-react": "^0.8.0"
   }
 }
