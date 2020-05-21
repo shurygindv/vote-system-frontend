@@ -60,6 +60,7 @@ module Padding = {
 
 module Size = {
   type t = [
+    | `sm
     | `md
     | `lg
     | `xlg

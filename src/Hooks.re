@@ -25,3 +25,37 @@ let useOverflowHiddenBody = _ => {
 
   documentBody -> HtmlElement.style -> useOverflowHiddenStyle;
 };
+
+// =============== //
+type progress = [
+      | `rejected
+      | `resolved
+      | `pending
+];
+
+let useWaitingApi = () => {
+    let (status, setStatus) = React.useState(_: option(progress) => None);
+
+    let eq = fun 
+      | v => v === status
+      | _ => false;
+
+    let isRejected = eq(Some(`rejected));
+    let isPending = eq(Some(`pending));
+    let isResolved= eq(Some(`resolved));
+
+    let setStatusFn = v => setStatus(_ => Some(v));
+
+  //  let setPending = _: unit => setStatusFn(`pending);
+  //  let setResolved = _: unit => setStatusFn(`resolved);
+
+    let i = setStatusFn;
+
+    let o = {
+      "isRejected": isRejected,
+      "isPending": isPending,
+      "isResolved": isResolved,
+    };
+
+    (o, i);
+}

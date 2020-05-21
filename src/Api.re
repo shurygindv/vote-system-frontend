@@ -3,13 +3,10 @@ module JsonTransport = {
     Fetch.HeadersInit.make({"Content-Type": "application/json"});
 
   let get = (~path) => {
-    Js.Promise.(
-      Fetch.fetch(path)
-      |> then_(Fetch.Response.json)
-    );
+    Js.Promise.(Fetch.fetch(path) |> then_(Fetch.Response.json));
   };
 
-  let post = (~path: string, ~payload: Js.Dict.t(Js.Json.t)) => {
+  let post = (path: string, payload: Js.Dict.t(Js.Json.t)) => {
     let body = Js.Json.stringify(Js.Json.object_(payload));
 
     Js.Promise.(
@@ -18,8 +15,8 @@ module JsonTransport = {
         Fetch.RequestInit.make(
           ~method_=Post,
           ~body=Fetch.BodyInit.make(body),
-          ~headers=headers,
-          ()
+          ~headers,
+          (),
         ),
       )
       |> then_(Fetch.Response.json)
@@ -45,3 +42,25 @@ let auth = (~login: string, ~password: string) => {
 
   JsonTransport.post("api/v1/auth", payload);
 };
+
+let addCandidate = (~name: string, ~description: string) => {
+  let payload =
+    json([
+      ("candidateName", name),
+      ("candidateDescription", description),
+    ]);
+
+  JsonTransport.post("api/v1/candidate/add", payload);
+};
+
+
+let createBulletin = (~name: string, ~description: string) => {
+  let payload =
+    json([
+      ("bulletinName", name),
+      ("bulletinDescription", description),
+    ]);
+
+  JsonTransport.post("api/v1/bulletin/add", payload);
+};
+

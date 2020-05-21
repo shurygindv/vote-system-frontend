@@ -6,10 +6,13 @@ ReactDOMRe.renderToElementWithId(<Application />, "root");
 [%bs.raw {|require('rsuite/dist/styles/rsuite-default.css')|}];
 
 // hot reload
-[@bs.val] external moduleHot : Js.nullable('accept) = "module.hot";
-[@bs.val] external moduleHotAccept : unit => unit = "module.hot.accept";
+type parcelModule;
+type hot;
+[@bs.val] external parcelModule : parcelModule = "module";
+[@bs.get] external hot : parcelModule => Js.nullable(hot) = "hot";
+[@bs.send.pipe : hot] external accept : unit => unit = "accept";
 
-switch (Js.Nullable.toOption(moduleHot)) {
-    | Some(_) => moduleHotAccept();
-    | _ => Js.log("hmmmmmmmmm")
+switch (Js.Nullable.toOption(parcelModule |> hot)) {
+  | Some(h) => h |> accept()
+  | _ => Js.log("We are not hot")
 };

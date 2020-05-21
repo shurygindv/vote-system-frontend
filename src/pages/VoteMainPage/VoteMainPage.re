@@ -1,6 +1,10 @@
 module Navbar = {
+  open IntlProvider;
+
   [@react.component]
   let make = _ => {
+    let (_, toggleLang) = useToggleLang();
+
     let handleSelect = (v: string, _e) => {
       Js.log(v);
       ();
@@ -11,23 +15,20 @@ module Navbar = {
         <Navbar.Body>
           <Nav onSelect=handleSelect activeKey="2">
             <Nav.Item eventKey="1" icon={<Icon icon="home" />}>
-              {React.string("Home")}
+              <Translator id="Home" />
             </Nav.Item>
-            <Nav.Item eventKey="3">
-              {React.string("Products")}
-            </Nav.Item>
-            <Dropdown title={React.string("About")}>
-              <Dropdown.Item eventKey="5">
-                {React.string("News")}
-              </Dropdown.Item>
-              <Dropdown.Item eventKey="6">
-                {React.string("News")}
-              </Dropdown.Item>
-            </Dropdown>
           </Nav>
+
           <Nav pullRight=true>
+            <Nav.Item 
+              icon={<Icon icon="cog" />} 
+              onClick={toggleLang}
+            >
+              <Translator id="Locale" />
+            </Nav.Item>
+
             <Nav.Item icon={<Icon icon="cog" />}>
-              <Text id="Vote.Settings" />
+              <Translator id="Vote.Settings" />
             </Nav.Item>
           </Nav>
         </Navbar.Body>
@@ -110,7 +111,7 @@ module Sidenav = {
               <Navlink
                 href="/vote/create-bulletin"
                 icon={<Icon icon="exchange" />}>
-                <Translator id="Vote.GenerateBulletin" />
+                <Translator id="Vote.CreateBulletin" />
               </Navlink>
 
               <Navlink
@@ -136,20 +137,32 @@ module Sidenav = {
 };
 
 module DynamicContent = {
+
+  module Styles = {
+    open Css;
+
+    let content = style([
+      padding(px(20))
+    ]);
+  }
+
   [@react.component]
   let make = _ => {
     let url = ReasonReactRouter.useUrl();
 
-    <Flex columns=true>
+    <Flex columns=true >
       <Navbar />
-      {switch (url.path) {
-       | ["vote", "dashboard"] => <VoteDashboard />
-       | ["vote", "add-candidate"] => <VoteAddCandidate />
-       | ["vote", "create-bulletin"] => <VoteCreateBulletin />
-       | ["vote", "rating"] => <VoteRating />
-       | ["vote", "settings"] => <VoteSettings />
-       | _ => <NotFoundPage />
-       }}
+
+      <div className=Styles.content>
+        {switch (url.path) {
+        | ["vote", "dashboard"] => <VoteDashboard />
+        | ["vote", "add-candidate"] => <VoteAddCandidate />
+        | ["vote", "create-bulletin"] => <VoteCreateBulletin />
+        | ["vote", "rating"] => <VoteRating />
+        | ["vote", "settings"] => <VoteSettings />
+        | _ => <NotFoundPage />
+        }}
+       </div>
     </Flex>;
   };
 };
