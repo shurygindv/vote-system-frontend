@@ -1,33 +1,108 @@
+open RsuiteUi;
+
+let callAddingCandidateApi = (name: string, description: string) => {
+  Api.addCandidate(~name, ~description);
+};
+
+let showSuccesNotification = _ => {
+  Notification.success(
+    Notification.Props.make(
+      ~title=<Text id="Vote.Candidate.Registered" />,
+      ~description=<EmptyText />,
+      ~placement="bottomStart",
+      (),
+    ),
+  );
+};
+
+let showErrorNotification = _ => {
+  Notification.error(
+    Notification.Props.make(
+      ~title=<Text id="Error.Unexpected" />,
+      ~description=<Text id="Error.TryLater" size=`sm />,
+      ~placement="bottomStart",
+      (),
+    ),
+  );
+};
 
 [@react.component]
 let make = _ => {
+  let (progress, setProgress) = Hooks.useWaitingApi();
+  let (formValues, setFormValues) =
+    React.useState(_ =>
+      {"candidateName": "", "candidateDescription": ""}
+    );
 
-  RsuiteUi.(
-  <Form layout=`horizontal>
-    <FormGroup>
-      <ControlLabel>{React.string("user")}</ControlLabel>
-      <FormControl name="name" />
-      <HelpBlock>{React.string("required")}</HelpBlock>
-    </FormGroup>
-    <FormGroup>
-      <ControlLabel>{React.string("email")}</ControlLabel>
-      <FormControl name="email" _type=`email />
-      <HelpBlock tooltip={true}>{React.string("Required")}</HelpBlock>
-    </FormGroup>
-    <FormGroup>
-      <ControlLabel>{React.string("password")}</ControlLabel>
-      <FormControl name="password" _type=`password  />
-    </FormGroup>
-    <FormGroup>
-      <ControlLabel>{React.string("Textarea")}</ControlLabel>
-      <FormControl name="textarea" rows={5} componentClass="textarea" />
-    </FormGroup>
-    <FormGroup>
-      <ButtonToolbar>
-        <Button appearance=`primary>{React.string("Submit")}</Button>
-        <Button appearance=`default>{React.string("Cancel")}</Button>
-      </ButtonToolbar>
-    </FormGroup>
-  </Form>
-  );
+  let addCandidate = (candidateName: string, candidateDesc: string) => {
+    Js.Promise.(
+      callAddingCandidateApi(candidateName, candidateDesc)
+      |> then_(_ => {
+           setProgress(`resolved);
+           showSuccesNotification();
+           resolve();
+         })
+      |> catch(_ => {
+           setProgress(`rejected);
+           showErrorNotification();
+           resolve();
+         })
+    );
+    ();
+  };
+
+  let handleSubmit = _ => {
+    setProgress(`pending);
+
+    addCandidate(
+      formValues##candidateName,
+      formValues##candidateDescription,
+    );
+  };
+
+  <Panel
+    header={<Text id="Vote.AddingCandidate" size=`lg bold=true />}>
+    <Form
+      formValue=formValues
+      onSubmit=handleSubmit
+      onChange={v => setFormValues(_ => v)}>
+      <FormGroup>
+        <ControlLabel>
+          <Text id="Vote.Candidate.Name" />
+        </ControlLabel>
+        <FormControl
+          _type=`text
+          name="candidateName"
+          required=true
+        />
+        <HelpBlock tooltip=true>
+          <Text id="Validation.Required" />
+        </HelpBlock>
+      </FormGroup>
+      <FormGroup>
+        <ControlLabel>
+          <Text id="Vote.Candidate.Goal" />
+        </ControlLabel>
+        <FormControl
+          name="candidateDescription"
+          rows=5
+          required=true
+          componentClass="textarea"
+        />
+        <HelpBlock tooltip=true>
+          <Text id="Validation.Required" />
+        </HelpBlock>
+      </FormGroup>
+      <FormGroup>
+        <ButtonToolbar>
+          <Button
+            loading={progress##isPending}
+            appearance=`primary
+            _type=`submit>
+            <Translator id="Action.Register" />
+          </Button>
+        </ButtonToolbar>
+      </FormGroup>
+    </Form>
+  </Panel>;
 };
