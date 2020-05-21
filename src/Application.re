@@ -2,5 +2,8 @@
 [@react.component]
 let make = _ => {
     // 
-    <Router />
+    <IntlProvider>
+        <Router />
+    </IntlProvider>
+   
 }

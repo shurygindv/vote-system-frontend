@@ -1,10 +1,8 @@
 
+
 [@react.component]
-let make = (
-  ~id, 
-) => {
-    {switch (Locale.t(id)) {
-     | En(v) => React.string(v)
-     | Ru(v) => React.string(v)
-     }}
+let make = (~id: string) => {
+  let text = IntlProvider.useIntl(id);
+
+  React.string(text);
 };

@@ -11,6 +11,7 @@ module Styles = {
   let defaultFontSize = fontSizeCss(1.3);
   let textSize =
     fun
+    | Some(`sm) => fontSizeCss(1.1)
     | Some(`md) => defaultFontSize
     | Some(`lg) => fontSizeCss(1.9)
     | Some(`xlg) => fontSizeCss(3.2)
