@@ -36,9 +36,8 @@ type progress = [
 let useWaitingApi = () => {
     let (status, setStatus) = React.useState(_: option(progress) => None);
 
-    let eq = fun 
-      | v => v === status
-      | _ => false;
+    let eq = fun
+      | v => v === status;
 
     let isRejected = eq(Some(`rejected));
     let isPending = eq(Some(`pending));

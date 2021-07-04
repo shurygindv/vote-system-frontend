@@ -2,7 +2,7 @@ open Hooks;
 
 module AuthorizationForm = {
   open Css;
-  open Tabs;
+  open !Tabs;
 
   module Styles = {
     let login = style([
@@ -33,8 +33,8 @@ module AuthorizationForm = {
               <AuthLoginForm />
           </TabPanel.Item>
 
-          <TabPanel.Item whited={true}> 
-              <AuthRegisterForm /> 
+          <TabPanel.Item whited={true}>
+              <AuthRegisterForm />
           </TabPanel.Item>
         </TabPanel>
       </Tabs>
@@ -48,22 +48,22 @@ let make = _ => {
   useOverflowHiddenBody();
 
   <Layout>
-    <Layout.Body 
-        background=`society 
+    <Layout.Body
+        background=`society
         height=`vh100
      >
      <Grid cols=`fr2>
-      <Background 
+      <Background
         fullHeight=true
         bg=`darkGray
       >
           <Flex align=`middleCenter fullHeight=true>
-              <Text 
-                  id="Auth.Slogan" 
-                  size=`xlg 
-                  color=`white 
-                  uppercase={true} 
-                  centered={true} 
+              <Text
+                  id="Auth.Slogan"
+                  size=`xlg
+                  color=`white
+                  uppercase={true}
+                  centered={true}
               />
           </Flex>
       </Background>

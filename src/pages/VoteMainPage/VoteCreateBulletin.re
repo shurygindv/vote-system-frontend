@@ -47,8 +47,7 @@ let make = _ => {
            showErrorNotification();
            resolve();
          })
-    );
-    ();
+    )->ignore;
   };
 
   let handleSubmit = _ => {
