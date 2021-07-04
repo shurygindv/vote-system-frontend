@@ -26,6 +26,5 @@
     "@glennsl/bs-json",
     "bs-rsuite-ui-react"
   ],
-  "ppx-flags": [],
-  "refmt": 3
+  "ppx-flags": []
 }

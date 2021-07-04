@@ -29,7 +29,7 @@ module Styles = {
 
       let fr2Col = gridTemplateColumns([fr(1.0), fr(1.0)]);
 
-      let make = fun 
+      let make = fun
         | Some(`fr2) => style([fr2Col])
         | None => "";
     };
@@ -42,14 +42,14 @@ let make = (
     ~className: string= "",
     ~fullHeight = false,
     ~cols: option(Styles.Cols.t) =?,
-    ~align: option(Styles.Align.t) =?, 
+    ~align: option(Styles.Align.t) =?,
 ) => {
-   let classes = Cn.make([
+   let classes = Cn.fromList([
        className,
        Styles.block,
        Styles.Align.make(align),
        Styles.Cols.make(cols),
-       Cn.ifTrue(Styles.fullHeight, fullHeight)
+       Cn.on(Styles.fullHeight, fullHeight)
    ]);
 
   <div className=classes>

@@ -19,8 +19,8 @@ module Styles = {
     let content = fun
         | Some(`spaceBetween) => style([spaceBetween])
         | None => ""
-        | _ => raise(Not_found); 
-    
+        | _ => raise(Not_found);
+
     let fullHeight = style([
         height(`percent(100.0))
     ]);
@@ -33,20 +33,20 @@ module Styles = {
 
 [@react.component]
 let make = (
-    ~children, 
-    ~className: string= "", 
+    ~children,
+    ~className: string= "",
     ~fullHeight=false,
     ~columns=false,
     ~align: option(Theme.Align.t) =?,
     ~content: option([ | `spaceBetween])=?
 ) => {
-   let classes = Cn.make([
+   let classes = Cn.fromList([
        className,
        Styles.block,
        Styles.align(align),
        Styles.content(content),
-       Cn.ifTrue(Styles.fullHeight, fullHeight),
-       Cn.ifTrue(Styles.columns, columns),
+       Cn.on(Styles.fullHeight, fullHeight),
+       Cn.on(Styles.columns, columns),
    ]);
 
   <div className=classes>

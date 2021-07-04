@@ -6,7 +6,7 @@ module Color = {
 
   let white = Css.white;
 
-  let make = fun 
+  let make = fun
     | Some(`white) => white
     | _ => raise(Not_found)
 };
@@ -26,7 +26,7 @@ module Bg = {
 
   let white = style([background(Color.white)])
   let society = style([societyBg, backgroundCover]);
-  let darkGray = style([background(rgba(0,0,0,0.3))]);
+  let darkGray = style([background(rgba(0,0,0,`num(0.3)))]);
 
   let make =
     fun

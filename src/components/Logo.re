@@ -10,7 +10,7 @@ module Styles = {
         display(`flex),
         justifyContent(`center),
         alignItems(`center),
-        background(rgba(0, 0, 0, 0.02))
+        background(rgba(0, 0, 0, `num(0.02)))
     ]);
 
     let text = style([
@@ -25,13 +25,13 @@ let make = (~withText=true) => {
   <a href="/vote/dashboard" className={Styles.block}>
     <img className={Styles.logo} src={Images.logo2} alt="logo" />
 
-    {withText ? 
-        <Text 
-            id="Vote.Slogan" 
+    {withText ?
+        <Text
+            id="Vote.Slogan"
             className={Styles.text}
-            uppercase={true} 
-            bold={true} 
-        /> 
+            uppercase={true}
+            bold={true}
+        />
         : React.string("")
     }
   </a>

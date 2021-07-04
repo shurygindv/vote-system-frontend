@@ -24,7 +24,7 @@ module Body = {
         ~height: option([ | `vh100])=?
       ) => {
     let classes =
-      Cn.make([
+      Cn.fromList([
         Styles.block,
         Styles.height(height),
         Theme.Bg.make(background),

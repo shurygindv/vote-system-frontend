@@ -11,15 +11,15 @@ module Styles = {
 
 [@react.component]
 let make = (
-  ~children, 
-  ~bg: option(Theme.Bg.t) = ?, 
-  ~className: string= "", 
+  ~children,
+  ~bg: option(Theme.Bg.t) = ?,
+  ~className: string= "",
   ~fullHeight=false
 ) => {
- let classes = Cn.make([
+ let classes = Cn.fromList([
      className,
-     Cn.ifTrue(Styles.fullHeight, fullHeight),
-     Styles.block, 
+     Cn.on(Styles.fullHeight, fullHeight),
+     Styles.block,
      Theme.Bg.make(bg)
   ]);
 
